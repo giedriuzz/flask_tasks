@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Start from: {{first}}</h4>
+<h4>End on: {{second}}</h4>
+<h3 style="color: blue;">Leap years:</h3>
+{%for year in range(first, second)%}
+    {%if (year % 400 == 0) and (year % 100 == 0)%}
+    <p>{{year}}</p>
+    {%elif (year % 4 ==0) and (year % 100 != 0)%}
+<p>{{year}}</p>
+    {%endif%}
+{%endfor%}
+{% endblock %}
