@@ -28,5 +28,14 @@ def login():
         return render_template("year.html")
 
 
+@app.route("/oneenter", methods=["GET", "POST"])
+def one_enter():
+    if request.method == "POST":
+        value_first = int(request.form["firsts"])
+        return render_template("enterleapyear.html", year=value_first)
+    else:
+        return render_template("oneenter.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)

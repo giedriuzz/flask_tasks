@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Entered: {{year}}</h4>
+    {%if (year % 400 == 0) and (year % 100 == 0)%}
+        <p style="color: blue;">Leap year:{{year}}</p>
+    {%elif (year % 4 ==0) and (year % 100 != 0)%}
+        <p style="color: blue;">Leap year: {{year}}</p>
+    {%else %}
+        <h3 style="color: blue;"><a style="color: black;">{{year}} </a> isn`t leap year</h3>
+    {%endif%}
+{% endblock %}
