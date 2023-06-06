@@ -1,40 +1,27 @@
 from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
 
+db = SqliteDatabase("db.db", Base)
+db.create_detabase()
 app = Flask(__name__)
 
-
-@app.route("/")
-def index():
-    return render_template("index.html")
+db = SQLAlchemy(app)
 
 
-@app.route("/<name>")
-def five_for(name):
-    return render_template("forfive.html", names=name)
+class Tevas(db.Model):
+    __tablename__ = "tevas"
+    id = db.Column(db.Integer, primary_key=True)
+    vardas = db.Column("Vardas", db.String)
+    pavarde = db.Column("Pavardė", db.String)
+    vaikas_id = db.Column(db.Integer, db.ForeignKey("vaikas.id"))
+    vaikas = db.relationship("Vaikas")
 
 
-@app.route("/leapyears")
-def leap_year():
-    return render_template("leapyears.html")
-
-
-@app.route("/year", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        value_first = int(request.form["first"])
-        value_second = int(request.form["second"])
-        return render_template("leapyears.html", first=value_first, second=value_second)
-    else:
-        return render_template("year.html")
-
-
-@app.route("/oneenter", methods=["GET", "POST"])
-def one_enter():
-    if request.method == "POST":
-        value_first = int(request.form["firsts"])
-        return render_template("enterleapyear.html", year=value_first)
-    else:
-        return render_template("oneenter.html")
+class Vaikas(db.Model):
+    __tablename__ = "vaikas"
+    id = db.Column(db.Integer, primary_key=True)
+    vardas = db.Column("Vardas", db.String)
+    pavarde = db.Column("Pavardė", db.String)
 
 
 if __name__ == "__main__":
